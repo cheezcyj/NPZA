@@ -1,5 +1,5 @@
 package com.pcwk.ehr.NoMember;
 
-public class UserController {
+public class NoMemberVO {
 
 }
