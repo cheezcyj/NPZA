@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Loading 페이지</title>
+<style>
+body {
+    font-family: 'EF_hyunydororong';
+    background-color: #F4F4F4;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; /* 추가 */
+}
+.loader {
+    border: 16px solid #F3F3F3;
+    border-top: 16px solid #3498DB;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute; /* 추가 */
+    top: 35%; /* 추가 */
+    left: 40%; /* 추가 */
+    transform: translate(-50%, -50%); /* 추가 */
+    z-index: 1; /* 추가 */
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <img alt="mbti이미지" src="/Oracle/image/images Loading.png">
+    <div class="loader"></div>
+    <h2>Loading...</h2>
+</div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="JH">
+<style>
+@font-face {
+  font-family: 'Cafe24Dongdong';
+  src:
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import
+  url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&display=swap')
+  ;
+
+fieldset {
+  border: 100px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 50px;
+  color: black;
+  text-align: center;
+  background-color: #FFD500;
+  border: none;
+  height: auto;
+  width: auto;
+  background-position: center;
+  border-radius: 5px;
+  display: inline-block;
+  font-family: Cafe24Dongdong;
+  padding: 15px 25px;
+}
+
+table {
+  border: 1px thin;
+  border-collapse: collapse;
+}
+
+.jb-th-1 {
+  align-content: center;
+  width: 100px;
+}
+
+.jb-th-2 {
+  width: 480px;
+  text-align: left;
+}
+
+.inner-page {
+  display: none; /* 초기에 숨김 처리 */
+}
+
+td, th {
+  font-family: Cafe24Dongdong;
+}
+
+.pagination .page_link {
+  text-align: center;
+}
+
+.config {
+  background-color: #FFD500;
+  border: none;
+  color: black;
+  padding: 15px 128px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 4px 2px;
+}
+
+.Button1 {
+  margin-left: 6px;
+}
+</style>
+<title>NAE PAL ZZA YA</title>
+</head>
+<body>
+  <div>
+    <fieldset>
+      <h1>
+        <span id="username" style="font-weight: bold;">님</span><span
+          style="font-weight: lighter;"> 어서오세요</span>
+      </h1>
+    </fieldset>
+  </div>
+
+  <div>
+    <fieldset>
+      <table id="data-table" border="1">
+        <tr>
+          <th>날짜</th>
+          <th>MBTI</th>
+          <th align="left">URL</th>
+        </tr>
+        <!-- 첫 번째 행 -->
+        <tr>
+          <td class="jb-th-1">2023-05-**</td>
+          <td class="jb-th-1">ISFP</td>
+          <td class="jb-th-2"><a
+            href="http://localhost:8080/Project/Project/P1/Main_P.html">http://localhost:8080/Project/Project/P1/Main_P.html</a>
+          </td>
+        </tr>
+        <!-- 나머지 행들 -->
+        <tr>
+          <td class="jb-th-1">2023-05-**</td>
+          <td class="jb-th-1">ISFJ</td>
+          <td class="jb-th-2"><a
+            href="http://localhost:8080/Project/Project/P2/Main_P.html">http://localhost:8080/Project/Project/P2/Main_P.html</a>
+          </td>
+        </tr>
+        <tr>
+          <td class="jb-th-1">2023-05-**</td>
+          <td class="jb-th-1">INFJ</td>
+          <td class="jb-th-2"><a
+            href="http://localhost:8080/Project/Project/P3/Main_P.html">http://localhost:8080/Project/Project/P3/Main_P.html</a>
+          </td>
+        </tr>
+        <!-- 나머지 행들 계속 추가 -->
+      </table>
+    </fieldset>
+  </div>
+
+  <div style="text-align: center;">
+    <button class="Button1" type="button">
+      <!-- 이전 페이지 경로 -->
+      &lt;
+    </button>
+    <button class="Button1" type="button">
+      <!-- 1페이지 경로 -->
+      1
+    </button>
+    <button class="Button1" type="button">
+      <!-- 2페이지 경로 -->
+      2
+    </button>
+    <button class="Button1" type="button">
+      <!-- 다음 페이지 경로 -->
+      &gt;
+    </button>
+  </div>
+
+  <div
+    style="text-align: center; position: fixed; bottom: 20px; left: 0; right: 0;">
+    <button class="config" type="button"
+      onclick="location.href='Ne05_MemberResultPage.html'">
+      <!-- 운세 결과 경로 -->
+      오늘의 운세 보러가기
+    </button>
+  </div>
+
+  <script>
+  
+    var username = "aaaaaaaaaaaaaa"; //닉네임 입력
+    
+    // HTML 요소에 동적으로 이름 삽입
+    var usernameElement = document.getElementById("username");
+    usernameElement.textContent = username;
+    
+    // 데이터의 존재 여부에 따라 표의 가시성을 조절합니다.
+    const dataTable = document.getElementById("data-table");
+    const numberOfColumnsToShow = 11; // 표에 보여줄 열 개수
+    const hasData = true; // 데이터의 존재 여부 (실제 데이터 확인 로직에 따라 대체해야 함)
+
+    if (hasData) {
+      dataTable.style.display = "table";
+    } else {
+      dataTable.style.display = "none";
+    }
+
+    // 표의 열 개수에 따라 행들을 아래로 쭉 나열하고, 초과되는 열은 숨깁니다.
+    const rows = dataTable.querySelectorAll("tr");
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.querySelectorAll("td, th");
+      if (cells.length > numberOfColumnsToShow) {
+        const remainingCells = Array.from(cells).slice(numberOfColumnsToShow);
+        remainingCells.forEach(cell => cell.style.display = "none");
+      }
+    }
+
+    // 다음 페이지 구간 위치 조정
+    const nextPageSection = document.querySelector("div[style='text-align: center; position: fixed; bottom: 20px; left: 0; right: 0;']");
+    const lastRow = dataTable.querySelector("tr:last-child");
+    lastRow.insertAdjacentElement("afterend", nextPageSection);
+  </script>
+</body>
+</html>
