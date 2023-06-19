@@ -5,7 +5,7 @@ public class NotMemberVO {
     private String mbti;
     private String nickname;
     private String gender;
-    private String zodiac;
+    private String ani;
 
     // 생성자, getter 및 setter 생략
 
@@ -35,10 +35,18 @@ public class NotMemberVO {
     }
 
     public String getZodiac() {
-        return zodiac;
+        return ani;
     }
 
     public void setZodiac(String zodiac) {
-        this.zodiac = zodiac;
+        this.ani = zodiac;
     }
+
+	@Override
+	public String toString() {
+		return "NotMemberVO [mbti=" + mbti + ", nickname=" + nickname + ", gender=" + gender + ", ani=" + ani
+				+ ", toString()=" + super.toString() + "]";
+	}
+    
+    
 }
