@@ -34,12 +34,12 @@ public class NotMemberVO {
         this.gender = gender;
     }
 
-    public String getZodiac() {
+    public String getAni() {
         return ani;
     }
 
-    public void setZodiac(String zodiac) {
-        this.ani = zodiac;
+    public void setAni(String zodiac) {
+        this.ani = ani;
     }
 
 	@Override

@@ -27,8 +27,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	
-	
 	/**
 	 * 단건 수정
 	 * @param user
