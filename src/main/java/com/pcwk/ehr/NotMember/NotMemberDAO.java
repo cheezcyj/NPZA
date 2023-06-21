@@ -1,5 +1,9 @@
 package com.pcwk.ehr.NotMember;
+
+import java.sql.SQLException;
+
 public interface NotMemberDAO {
-    void save(NotMemberVO notMember);
+   public String insert (NotMemberVO notMember) throws SQLException;
+   
 }
 

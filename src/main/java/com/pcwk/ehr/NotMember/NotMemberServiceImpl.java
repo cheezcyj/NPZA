@@ -15,10 +15,20 @@ public class NotMemberServiceImpl implements NotMemberService {
         notMember.setMbti(mbti);
         notMember.setNickname(nickname);
         notMember.setGender(gender);
-        notMember.setAni(ani);
-
-        notMemberDAO.save(notMember);
+        notMember.setani(ani);
     }
+
+	@Override
+	public void saveNotMemberInfo(NotMemberVO notMemberVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insert(NotMemberVO notMember) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 
