@@ -6,10 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MainPageDAOImpl implements MainPageDAO {
-    private static final String NAMESPACE = "com.example.myapplication.mapper.MainPageMapper";
+    private static final String NAMESPACE = "com.pcwk.ehr.MainPage.MainPageMapper";
 
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
-    // TODO: Implement methods for data access
 }
