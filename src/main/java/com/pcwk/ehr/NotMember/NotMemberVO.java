@@ -17,8 +17,6 @@ public class NotMemberVO {
 		this.ani = ani;
 	}
 
-
-
 	// 각 필드의 getter 및 setter
     public String getMbti() {
         return mbti;

@@ -2,15 +2,64 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="UTF-8">
-<link rel="stylesheet" href="NotMemberCSS.css">
-</head>
+<style id="fullpage_styles">
+@font-face {
+  font-family: 'Cafe24Dongdong';
+  src:
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'NeoDunggeunmo';
+  src:
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h2 {
+  font-family: 'Cafe24Dongdong';
+}
+
+select {
+  width: 150px;
+  padding: 0.5em;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+.name {
+  width: 150px;
+  padding: 0.5em;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+button {
+  font-family: 'NeoDunggeunmo';
+}
+
+.config {
+  background-color: #FFD500;
+  border: none;
+  color: black;
+  padding: 15px 128px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 4px 2px;
+}
+</style>
+</head>
+</head>
 <body>
-  <h2 class="title">MBTI를 입력하세요</h2>
+  <h2 style="text-align: center;">MBTI를 입력하세요</h2>
   <div style="text-align: center;">
     <form onsubmit="return submitForm()">
       <select id="mbti" name="mbti">
@@ -32,12 +81,20 @@
         <option value="ENFJ">ENFJ</option>
         <option value="ENFP">ENFP</option>
       </select>
-      <h2 style="text-align: center;">닉네임을 입력하세요</h2>
-      <input id="nickname" class="name" maxlength="30" required="" size="10" type="text" />
-      <h2 style="text-align: center;">성별을 입력하세요</h2>
-      <input name="gender" value="남자" type="radio" /> 남자
-      <input name="gender" value="여자" type="radio" /> 여자
-      <h2 style="text-align: center;">띠를 입력하세요</h2>
+    </form>
+  </div>
+  <h2 style="text-align: center;">닉네임을 입력하세요</h2>
+  <div style="text-align: center;">
+    <input id="nickname" class="name" maxlength="30" required="" size="10" type="text" />
+  </div>
+  <h2 style="text-align: center;">성별을 입력하세요</h2>
+  <div style="text-align: center;">
+    <input name="gender" value="남자" type="radio" /> 남자
+    <input name="gender" value="여자" type="radio" /> 여자
+  </div>
+  <h2 style="text-align: center;">띠를 입력하세요</h2>
+  <div style="text-align: center;">
+    <form>
       <select id="ani" name="ani">
         <option style="text-align: center;" value="none">=== 선택 ===</option>
         <option value="mouse">쥐띠</option>
@@ -53,14 +110,14 @@
         <option value="dog">개띠</option>
         <option value="pig">돼지띠</option>
       </select>
-      <h2 style="text-align: center;">현재(서버시간)의 네 팔자야</h2>
-      <div style="text-align: center;">
-        <button class="config" type="submit" onclick="location.href='Ne06_NotMemberResultPage.html'">운세 확인</button>
-      </div>
     </form>
   </div>
+  <h2 style="text-align: center;">현재(서버시간)의 네 팔자야</h2>
+  <div style="text-align: center;">
+    <button class="config" type="submit" onclick="location.href='Ne06_NotMemberResultPage.html'">운세 확인</button>
+  </div>
   
-<script>
+  <script>
  function submitForm() {
      var validMbtiValues = ["ISTJ", "ISTP", "ISFJ", "ISFP", "INTJ", "INTP", "INFJ", "INFP", "ESTJ", "ESTP", "ESFJ", "ESFP", "ENTJ", "ENTP", "ENFJ", "ENFP"];
      var validAniValues = ["mouse", "cow", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "chicken", "dog", "pig"];

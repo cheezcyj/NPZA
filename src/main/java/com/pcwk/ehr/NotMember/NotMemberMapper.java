@@ -12,5 +12,4 @@ public interface NotMemberMapper {
     @Select("SELECT * FROM not_member WHERE nickname = #{nickname}")
     NotMemberVO getNotMemberInfoByNickname(String nickname);
 
-
 }
