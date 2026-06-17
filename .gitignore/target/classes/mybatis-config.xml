@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+  <settings>
+    <setting name="logImpl" value="LOG4J2"/>
+  </settings>
+
+
+
+
+  <typeAliases>
+    <typeAlias type="com.pcwk.ehr.resultUrl.Result_UrlVO" alias="Result_Url_VO"/>
+     <typeAlias type="com.pcwk.ehr.login.LoginVO" alias="LogInVO"/>
+     <typeAlias type="com.pcwk.ehr.NotMember.NotMemberVO" alias="NotMemberVO"/>
+     <typeAlias type="com.pcwk.ehr.result.ResultVO" alias="ResultVO"/>
+     <typeAlias type="com.pcwk.ehr.share.ShareVO" alias="ShareVO"/>
+     <typeAlias type="com.pcwk.ehr.signUp.SignUpVO" alias="SignUpVO"/>
+   </typeAliases>
+
+  
+  
+</configuration>

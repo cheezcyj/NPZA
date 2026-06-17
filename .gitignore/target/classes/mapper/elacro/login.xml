@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr">
+
+
+ <select id="get" parameterType="LogInVO" resultMap="userMap">
+			SELECT a.ID, a.NICKNAME, an.ANI_NAME, m.MBTI_TYPE
+			FROM ACCOUNT_TB a
+			JOIN ANI_TB an ON a.ANI = an.ANI
+			JOIN MBTI_TB m ON a.MBTI = m.MBTI
+			where id = #{userId}                           
+ 
+ </select>
+
+
+     <select id="passCheck" parameterType="LogInVO" resultType="int">
+    SELECT count(*) cnt
+    FROM
+        account_tb
+        WHERE id = #{userId}
+        AND   password = #{passwd}
+    </select>
+
+    <select id="idCheck" parameterType="LogInVO" resultType="int">
+    SELECT count(*) cnt
+    FROM
+        account_tb
+    WHERE id  = #{userId}
+    </select>
+
+    
+  <resultMap type="LogInVO" id="userMap">
+    <result column="id" property="userId" />
+    <result column="password" property="passwd" />
+    <result column="nickname" property="nickName" />
+    <result column="mbti_type" property="mbti" />
+    <result column="ani_name" property="ani" />
+  </resultMap>
+ 
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr">
+
+
+     <select id="resultSelect" parameterType="Result_Url_VO" resultType="Result_Url_VO">
+        SELECT a.nickname,
+               u.result_date,
+               u.url,
+               m.mbti_type
+        FROM account_tb a
+                 JOIN url_tb u ON a.id = u.id
+                 JOIN mbti_tb m ON a.mbti = m.mbti
+        WHERE a.id = #{Id}
+    </select>
+
+
+
+</mapper>
