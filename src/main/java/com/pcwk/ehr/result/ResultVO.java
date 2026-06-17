@@ -136,6 +136,4 @@ public class ResultVO {
 				+ nmAni + ", nmMbti=" + nmMbti + ", url=" + url + "]";
 	}
 
-
-
 }
