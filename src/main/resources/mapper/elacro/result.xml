@@ -7,24 +7,77 @@
         SELECT 
             acc.nickname AS nick,
             m.img_src AS mbtiSrc,
-            a.img_src AS aniSrc
+            m.img_src AS mbti,
+            a.img_src AS aniSrc,
+            a.img_src AS ani
         FROM account_tb acc
-		        JOIN mbti_tb m ON acc.mbti = m.mbti
-		        JOIN ani_tb a ON acc.ani = a.ani
+            JOIN mbti_tb m ON acc.mbti = m.mbti
+            JOIN ani_tb a ON acc.ani = a.ani
         WHERE acc.id = #{id}
     </select>
     
-    <!-- 추후에 seq는 삭제해도 됨 -->
+    <!-- Same MBTI/gender/animal combination always receives the same luck text. -->
     <select id="getLuck" parameterType ="ResultVO" resultType="ResultVO">
-				SELECT luck_ty, seq, luck
-				FROM (
-				    SELECT luck_ty, seq, luck, ROW_NUMBER() OVER (PARTITION BY luck_ty ORDER BY dbms_random.value) AS rn
-				    FROM (
-				        SELECT seq, luck, luck_ty
-				        FROM luck_text_tb
-				        WHERE luck_ty IN (10, 20, 30, 40, 50)
-				    )
-				)
-				WHERE rn = 1
+        WITH user_key AS (
+            SELECT
+                NVL(#{mbti, jdbcType=VARCHAR}, TO_CHAR(acc.mbti)) AS mbti,
+                CASE
+                    WHEN NVL(#{gender, jdbcType=VARCHAR}, acc.gender) IN ('M', '남자') THEN 'M'
+                    WHEN NVL(#{gender, jdbcType=VARCHAR}, acc.gender) IN ('F', '여자') THEN 'F'
+                    ELSE NVL(#{gender, jdbcType=VARCHAR}, acc.gender)
+                END AS gender,
+                NVL(#{ani, jdbcType=VARCHAR}, TO_CHAR(acc.ani)) AS ani
+            FROM dual
+            LEFT JOIN account_tb acc
+                ON acc.id = #{id, jdbcType=VARCHAR}
+        )
+        SELECT luck_ty, seq, luck
+        FROM (
+            SELECT
+                lt.luck_ty,
+                lt.seq,
+                lt.luck,
+                ROW_NUMBER() OVER (
+                    PARTITION BY lt.luck_ty
+                    ORDER BY ORA_HASH(uk.mbti || ':' || uk.gender || ':' || uk.ani || ':' || lt.luck_ty || ':' || lt.seq), lt.seq
+                ) AS rn
+            FROM luck_text_tb lt
+            CROSS JOIN user_key uk
+            WHERE lt.luck_ty IN (10, 20, 30, 40, 50)
+        )
+        WHERE rn = 1
     </select>
+    
+    <select id="getNick" parameterType="ResultVO" resultType="ResultVO">
+      SELECT
+          img_src AS nmAni
+        FROM
+            ani_tb
+        WHERE
+            ani = #{ani}
+      
+      UNION ALL
+      
+      SELECT
+          img_src AS nmMbti
+        FROM
+            mbti_tb
+        WHERE
+            mbti = #{mbti}    
+    </select>
+    
+    <insert id="add" parameterType="ResultVO">
+    INSERT INTO elcaro.url_tb (
+		    seq,
+		    result_date,
+		    id,
+		    url
+      ) VALUES (
+		    url_seq.NEXTVAL,
+		    sysdate,
+		    #{id},
+		    #{url}
+      )
+    </insert>
+    
 </mapper>

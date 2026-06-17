@@ -3,12 +3,16 @@ package com.pcwk.ehr.share;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.print.attribute.standard.SheetCollate;
+import javax.servlet.http.HttpServletRequest;
 
+public interface ShareService {
 
-public interface shareService {
-	
-
-	public List<shareVO> urlSelect(shareVO search) throws SQLException;
+	/**
+	 * 운세 url 조회
+	 * @param search
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<ShareVO> shareDesiredURL(ShareVO search, HttpServletRequest request) throws SQLException;
 
 }

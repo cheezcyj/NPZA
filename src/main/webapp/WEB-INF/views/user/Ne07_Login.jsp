@@ -1,10 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
+    <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+  <script>
+  $(document).ready(function(){ //모든 화면이다 로딩이 되면
+    console.log("$(document).ready")
+    
+    //jquery이벤트 감지
+    $("#doLogin").on("click",function(){
+       console.log("$(doLogin)")
+       
+       console.log("userId:"+$('#userId').val());
+       console.log("passwd:"+$('#passwd').val());
+      
+      if (confirm('로그인 하시겠습니까?')==false)return;
+        
+
+       
+       $.ajax({
+              type: "POST",
+              url:"${CP}/ELCARO/doLogin.do",
+              dataType:"html",
+              data:{
+                userId:$('#userId').val(),
+                passwd:$('#passwd').val()  
+              },
+              success:function(data){//통신 성공
+                
+                
+                  let paredJSON = JSON.parse(data)
+                  console.log("paredJSON.msgId:"+paredJSON.msgId);
+                 // console.log("success data:"+data);
+                 
+                 if("1" == paredJSON.msgId || "10" == paredJSON.msgId){
+                   alert(paredJSON.msgContents);
+                   //jquery focus
+                   $('#userId').focus();
+                   return;
+                 }
+                 
+                 if("2" == paredJSON.msgId || "20" == paredJSON.msgId){
+                     alert(paredJSON.msgContents);
+                     //jquery focus
+                     $('#userId').focus();
+                     return;
+                   }
+                 
+                 console.log("paredJSON.msgContents:"+paredJSON.msgContents);
+                 //로그인 성공
+                 if("30" == paredJSON.msgId ){
+                     alert(paredJSON.msgContents);
+                     
+                     //javascript 내장 객체: url
+                     window.location.href ="${CP}/ELCARO/myPage.do";
+                  }  
+                 
+                 
+                 
+                 
+                },
+                error:function(data){//실패시 처리
+                  console.log("error:"+data);
+                }
+            });
+      
+      
+    })//--doLogin end
+    
+    
+  });//--end document
+  </script>
     <style>
         body {
             font-family: NeoDunggeunmo, Cafe24Dongdong;
@@ -58,20 +130,18 @@
     <h2>NE PAL ZZY YA</h2>
     <form>
         <div class="form-group">
-            <label for="username">ID:</label> <input type="text" id="username"
-                                                     name="username" required>
+            <label for="username">ID:</label>
+            <input type="text" id="userId" name="userId" maxlength="20">
         </div>
         <div class="form-group">
-            <label for="password">PW:</label> <input type="password"
-                                                     id="password" name="password" required>
+            <label for="password">PW:</label>
+            <input type="password" id="passwd" name="passwd" maxlength="100">
         </div>
         <div class="form-group">
-            <button type="submit"
-                    onclick="location.href='Ne09_MyPage.html'">
-                >로그인</button>
+            <input type="button" value="로그인" id="doLogin">
         </div>
         <div class="form-group signup-link">
-            <a href="Ne08_SignUp.html">회원가입</a>
+            <a href="/ehr/ELCARO/SignUp.do">회원가입</a>
         </div>
     </form>
 </div>

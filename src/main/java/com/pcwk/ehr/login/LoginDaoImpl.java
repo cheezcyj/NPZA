@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LoginDaoImpl implements LoginDao {
 
-	final String NAMESPACE = "com.pcwk.ehr.login";
+	final String NAMESPACE = "com.pcwk.ehr";
 	final String DOT = ".";
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;// DB 연결객체

@@ -3,6 +3,8 @@ package com.pcwk.ehr.signUp;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.pcwk.ehr.signUp.SignUpVO;
 
 public interface SignUpDao {

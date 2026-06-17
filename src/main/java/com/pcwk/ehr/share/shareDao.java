@@ -4,9 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public interface shareDao {
+public interface ShareDao {
 
-
-	public List<shareVO> urlSelect(shareVO search) throws SQLException;
+	public List<ShareVO> shareDesiredURL(ShareVO search) throws SQLException;
 
 }

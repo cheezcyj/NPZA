@@ -38,32 +38,43 @@
             padding: 20px;
         }
 
-        .YES {
+        div button{
             font-family: 'NeoDunggeunmo';
             background-color: #FFD500;
             border: none;
             color: black;
-            padding: 15px 128px;
+            padding: 18px 128px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 20px;
             margin: 4px 2px;
             border-radius: 5px;
         }
-
-        .NO {
+        .w-btn-outline {
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             font-family: 'NeoDunggeunmo';
-            background-color: #FFD500;
-            border: none;
-            color: black;
-            padding: 15px 132px;
-            text-align: center;
             text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            border-radius: 5px;
+            font-weight: 600;
+            transition: 0.25s;
+            border:#F5D061;
+        }
+
+        .w-btn-yellow-outline {
+            background-color: #F5D061;
+            border-color: #ffffff;
+        }
+
+        .w-btn-yellow-outline:hover {
+            background-color: #D3D3D3;
+            color: #000000;
+        }
+
+        div img {
+          width: 300px; 
+          height: auto;
         }
     </style>
 </head>
@@ -71,10 +82,13 @@
 <body>
 <div style="text-align: center;"><button class="NAEPALZZAYA" type="submit">NAE PAL ZZA YA</button></div>
 <div>&nbsp;</div>
-<div style="text-align: center;"><img src="../resources/images/daemoon.png" alt="대문이미지" /></div>
+<div style="text-align: center;">
+  <img src="../resources/images/daemoon.png" alt="대문이미지" />
+</div>
 <div class="MBTI" style="text-align: center;">당신의 MBTI를 아시나요?</div>
 <div>&nbsp;</div>
-<div style="text-align: center;"><button class="YES" type="submit"
-                                         onclick="location.href='Ne02_QuestionMemeber.html'"> YES</button>&nbsp;<button class="NO" type="submit" onclick="location.href='https://answer.moaform.com/answers/EnPBng'">NO</button></div>
+<div style="text-align: center;">
+  <button class="YES w-btn-outline w-btn-yellow-outline" type="submit"onclick="location.href='Ne02_QuestionMemeber.html'"> YES</button>&nbsp;
+  <button class="NO w-btn-outline w-btn-yellow-outline" type="submit" onclick="location.href='https://answer.moaform.com/answers/EnPBng'">NO</button></div>
 </body>
 </html>

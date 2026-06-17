@@ -92,7 +92,8 @@
     <fieldset>
         <h1>
             <span id="username" style="font-weight: bold;"></span>님
-            <span style="font-weight: lighter;"> 어서오세요</span>
+            <span style="font-weight: lighter;"> 어서오세요 </span>
+            
         </h1>
     </fieldset>
 </div>
@@ -109,7 +110,7 @@
                 <tr>
                     <td>${vo.mbti_type}</td>
                     <td>${vo.result_date}</td>
-                    <td>${vo.url}</td>
+                    <td><a href="${vo.url}" target="_blank">${vo.url}</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -122,14 +123,14 @@
 <div
         style="text-align: center; position: fixed; bottom: 20px; left: 0; right: 0;">
     <button class="config" type="button"
-            onclick="location.href='Ne05_MemberResultPage.html'">
+            onclick="location.href='/ehr//ELCARO/result.do'">
         <!-- 운세 결과 경로 -->
         오늘의 운세 보러가기
     </button>
 </div>
 
 <script>
-    var nickname = "${list[0].nickname}";
+    var nickname = "${sessionScope.niName}";
 
     // HTML 요소에 동적으로 이름 삽입
     var usernameElement = document.getElementById("username");
@@ -187,10 +188,33 @@
             pagination.appendChild(button);
         }
     }
+    
+    
+
+ // URL을 축약하여 표시하는 함수
+    function shortenUrl(url) {
+        const maxUrlLength = 20;
+        if (url.length > maxUrlLength) {
+            return url.slice(0, maxUrlLength) + "...";
+        }
+        return url;
+    }
+
+    // URL 행 데이터를 축약하여 표시하는 함수
+    function shortenUrlRowData() {
+        const urlCells = dataTable.querySelectorAll("td:nth-child(3) a"); // URL이 표시될 셀의 선택자
+
+        urlCells.forEach(function(cell) {
+            const url = cell.textContent;
+            cell.textContent = shortenUrl(url);
+            cell.title = url; // 축약된 URL에 마우스를 올렸을 때 전체 URL을 툴팁으로 보여줍니다.
+        });
+    }
 
     // 초기 페이지 설정
     showDataForPage(1);
     createPagination();
+    shortenUrlRowData();
 </script>
 </body>
 </html>

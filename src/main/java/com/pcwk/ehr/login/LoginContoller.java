@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.MessageVO;
 
 @Controller("LoginContoller")
-@RequestMapping("login")
+@RequestMapping("ELCARO")
 public class LoginContoller {
 
 	final Logger LOG = LogManager.getLogger(getClass());
@@ -42,6 +42,23 @@ public class LoginContoller {
 		// -> /WEB-INF/views/login/login.jsp
 		return "user/Ne07_Login";
 	}
+	
+	@RequestMapping(value = "/logout.do")
+    public String logout(HttpSession session) {
+        LOG.debug("┌───────────────┐");
+        LOG.debug("│logout()       │");
+        LOG.debug("└───────────────┘");
+
+
+        if(null!=session.getAttribute("user")) {
+            session.removeAttribute("user");
+            session.invalidate();
+            LOG.debug("=session.getAttribute(user)");
+        }
+        return "user/Ne07_Login";
+
+    }
+
 
 	@RequestMapping(value = "/doLogin.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -89,6 +106,8 @@ public class LoginContoller {
 			if (null != userinfo) {
 				httpsession.setAttribute("user", userinfo.getUserId());
 				httpsession.setAttribute("niName", userinfo.getNickName());
+				httpsession.setAttribute("mbti", userinfo.getMbti());
+				httpsession.setAttribute("ani", userinfo.getAni());
 				LOG.debug("-------------userinfo------------"+userinfo.getUserId());
 				LOG.debug("-------------userinfo------------"+userinfo.getNickName());
 			} else {

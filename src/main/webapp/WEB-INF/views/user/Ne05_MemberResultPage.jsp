@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>tab</title>
+    <title>MemberResultPage</title>
+    <jsp:include page="header.jsp"/>
     <style>
-        body {
+       body {
             background-color: #EDF1D6;
             margin-top: 100px;
             font-family: 'Trebuchet MS', serif;
@@ -31,7 +33,7 @@
             list-style: none;
             display: flex;
             justify-content: center;
-            width: 100%;
+            width: 150%;
             margin-bottom: 0px;
         }
 
@@ -155,6 +157,27 @@
             cursor: pointer;
             background-clip: padding-box;
         }
+         .w-btn-outline {
+            position: relative;
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            font-family: 'NeoDunggeunmo';
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+            border:#F5D061;
+        }
+
+        .w-btn-yellow-outline {
+            background-color: #F5D061;
+            border-color: #ffffff;
+        }
+
+        .w-btn-yellow-outline:hover {
+            background-color: #D3D3D3;
+            color: #000000;
+        }
         @font-face {
             font-family: 'NeoDunggeunmo';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
@@ -172,13 +195,13 @@
 <div class="box" style="margin-bottom: 0;">
     <p>
         <img style="display: block; margin: 0 auto;"
-             src="${outVO.mbtiSrc}" width="300" height="150" />
+             src="${outVO.mbtiSrc}" width="100" height="50" />
     </p>
 </div><br>
 <div class="box" style="margin-top: 0;">
     <p>
         <img style="display: block; margin: 0 auto;"
-             src="${outVO.aniSrc}" width="300" height="300" />
+             src="${outVO.aniSrc}" width="150" height="150" />
     </p>
 </div>
 <div class="container">
@@ -205,14 +228,16 @@
         <p>${list[4].luck}</p>
     </div>
 </div>
+
 <div style="text-align: center; margin-top: 20px;">
-    <a href = "Ne03_NotMember.html">
-        <button id="retry-button" class="button">다시하기</button>
+    <a href = "/ehr/ELCARO/myPage.do">
+        <button id="retry-button" class="button w-btn-outline w-btn-yellow-outline">다시하기</button>
     </a>
-    <a href = "Ne11_SharePage.html">
-        <button id="share-button" class="button">공유하기</button>
+    <a href = "/ehr/ELCARO/shareDesiredURL.do">
+        <button id="share-button" class="button w-btn-outline w-btn-yellow-outline">공유하기</button>
     </a>
 </div>
+
 <script>
     $(document).ready(function() {
         $('.tab-content').hide();
@@ -225,7 +250,7 @@
         });
         // Retry button click event handler
         $('#retry-button').click(function() {
-            // Handle retry functionality
+        	/*  window.location.href = "/ehr/ELCARO/myPage.do"; */
         });
         // Share button click event handler
         $('#share-button').click(function() {
@@ -248,11 +273,62 @@
 
         // ...
     });
+    
+    var sessionId = "${sessionScope.user}";
+    $(document).ready(function() {
+    	  // AJAX 요청 초기화
+    	  $.ajax({
+    	    url: '/ehr/ELCARO/pushData.do',
+    	    method: 'GET',
+            async : "true",
+            dataType : "html",
+            data : { 
+              "id" : sessionId,
+              "url" : url
+            },
+    	    success: function(response) {
+    	      // 요청 성공 시 동작할 코드
+    	      console.log('AJAX 요청 성공');
+    	      console.log(response);
+    	    },
+    	    error: function(xhr, status, error) {
+    	      // 요청 실패 시 동작할 코드
+    	      console.log('AJAX 요청 실패');
+    	      console.log(error);
+    	    }
+    	  });
+    	});
 
-    function adjustContainerWidth() {
-        var containerWidth = $('#tab-content').width(); // 탭 콘텐츠의 너비 가져오기
-        $('.container').width(containerWidth); // .container의 너비 설정
-    }
+
+   // 매개변수 값을 설정합니다.
+/*       var nick = "{outVO.nick}";
+      var mbtiSrc = "{outVO.mbtiSrc}";
+      var aniSrc = "{outVO.aniSrc}";
+      var luckList = [
+        {luck: '{list[0].luck}'},
+        {luck: '{list[1].luck}'},
+        {luck: '{list[2].luck}'},
+        {luck: '{list[3].luck}'},
+        {luck: '{list[4].luck}'}
+      ]; */
+      
+      // 매개변수를 URL에 추가합니다.
+      var url = 'http://localhost:8080/ehr/ELCARO/result.do';
+/*       url += '?nick=' + encodeURIComponent(nick);
+      url += '&mbtiSrc=' + encodeURIComponent(mbtiSrc);
+      url += '&aniSrc=' + encodeURIComponent(aniSrc);
+      for (var i = 0; i < luckList.length; i++) {
+        url += '&luckList[' + i + '].luck=' + encodeURIComponent(luckList[i].luck);
+      } */
+
+      
+      var urlOutput = document.getElementById('urlOutput');
+      
+      // URL을 열거나 링크로 사용합니다.
+      console.log('URL: ' + url);
+      // 이후에는 해당 URL을 브라우저에서 열거나, 다른 페이지에서 링크로 사용하면 매개변수가 정상적으로 전달됩니다.
+
+
 
 </script>
 </body>

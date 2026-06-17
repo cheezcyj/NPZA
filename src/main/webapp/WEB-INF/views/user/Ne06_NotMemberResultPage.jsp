@@ -1,59 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:include page="header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>tab</title>
-    <style>
-        /*햄버거 버튼*/
-        body {
-            background-color: #333;
-            width: 500px;
-            margin: 30px auto;
-        }
-        .menu-trigger {
-            margin-right: 70px;
-            margin-bottom: 50px;
-        }
-        .menu-trigger,
-        .menu-trigger span {
-            display: inline-block;
-            transition: all .4s;
-            box-sizing: border-box;
-        }
-
-        .menu-trigger {
-            position: absolute;
-            top: 20px;
-            right: 5px;
-            width: 35px;
-            height: 30px;
-        }
-
-        .menu-trigger span {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: #fff;
-            border-radius: 4px;
-        }
-
-        .menu-trigger span:nth-of-type(1) {
-            top: 0;
-        }
-
-        .menu-trigger span:nth-of-type(2) {
-            top: 13px;
-        }
-
-        .menu-trigger span:nth-of-type(3) {
-            bottom: 0;
-        }
-        /*햄버거 버튼 end*/
-
-        body {
+    <title>NotMemberResultPage</title>
+        <style>
+       body {
             background-color: #EDF1D6;
             margin-top: 100px;
             font-family: 'Trebuchet MS', serif;
@@ -61,9 +15,14 @@
             text-align: center;
         }
         .container {
-            text-align: center;
+            text-align: left;     
             width: 500px;
             margin: 0 auto;
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         /*탭 스타일*/
@@ -73,7 +32,7 @@
             list-style: none;
             display: flex;
             justify-content: center;
-            width: 100%;
+            width: 150%;
             margin-bottom: 0px;
         }
 
@@ -105,16 +64,16 @@
 
         /*탭 내용*/
         .tab-content {
+            display: flex;
+            justify-content: center;
             border-radius: 4px;
             padding: 15px;
-            width: 100%;
-            height: 200px;
+            width: 700px;
+            height: auto;
             margin-top: 0px;
             font-family: 'Cafe24Dongdong';
             font-size: 24px;
             background: #E6AF2E;
-            display: flex;
-            justify-content: center;
         }
 
         @font-face {
@@ -197,6 +156,27 @@
             cursor: pointer;
             background-clip: padding-box;
         }
+        .w-btn-outline {
+            position: relative;
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            font-family: 'NeoDunggeunmo';
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+            border:#F5D061;
+        }
+
+        .w-btn-yellow-outline {
+            background-color: #F5D061;
+            border-color: #ffffff;
+        }
+
+        .w-btn-yellow-outline:hover {
+            background-color: #D3D3D3;
+            color: #000000;
+        }
         @font-face {
             font-family: 'NeoDunggeunmo';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
@@ -209,27 +189,37 @@
 </head>
 <body>
 <!-- 햄버거버튼 -->
-<a class="menu-trigger" href="#">
-    <span></span>
-    <span></span>
-    <span></span>
-</a>
-<div id= "keywords">
-    <h2>낙천적이고 감성적인 설명충 원숭이</h2>
-</div><br>
-<div id= "nickname">
-    <h1>"닉네임"</h1><h2>님의 운세는</h2>
-</div><br>
+  <div id="nickname">
+    <h1 id="user-nickname"></h1>
+    <h2>님의 운세는</h2>
+    <script>
+        // localStorage에서 닉네임을 가져와서 출력합니다.
+        const nickname = localStorage.getItem('nickname');
+        const nicknameElement = document.getElementById('user-nickname');
+        nicknameElement.textContent = nickname;
+        </script>
+  </div>
+  <br>
 <div class="box" style="margin-bottom: 0;">
     <p>
-        <img style="display: block; margin: 0 auto;"
-             src="/WEB_ME/Proj/images/esfp.png" alt="esfp" width="300" height="150" />
-    </p>
+     <img style="display: block; margin: 0 auto;"
+          src="${listnm[1].nmAni}" alt="${mbti}" width="100" height="50" />
+     <script>
+       const mbti = localStorage.getItem('mbti');
+       const mbtiElement = document.getElementById('mbti');
+       mbtiElement.textContent = mbti;
+     </script>        
+    </p> 
 </div><br>
 <div class="box" style="margin-top: 0;">
     <p>
         <img style="display: block; margin: 0 auto;"
-             src="/WEB_ME/Proj/images/원숭이_ESFP_ESFJ_누끼.png" alt="monkey" width="300" height="300" />
+             src="${listnm[0].nmAni}" alt="${ani}" width="150" height="150" />
+        <script>
+          const ani = localStorage.getItem('ani');
+          const aniElement = document.getElementById('ani');
+          aniElement.textContent = ani;       
+        </script>             
     </p>
 </div>
 <div class="container">
@@ -241,45 +231,61 @@
         <li class="tab-link" data-tab="tab-5">투자운</li>
     </ul>
     <div id="tab-1" class="tab-content">
-        <p>고백운</p>
+        <p>${list[0].luck}</p>
     </div>
     <div id="tab-2" class="tab-content">
-        <p>데이트운</p>
+        <p>${list[1].luck}</p>
     </div>
     <div id="tab-3" class="tab-content">
-        <p>상사운</p>
+        <p>${list[2].luck}</p>
     </div>
     <div id="tab-4" class="tab-content">
-        <p>퇴사운</p>
+        <p>${list[3].luck}</p>
     </div>
     <div id="tab-5" class="tab-content">
-        <p>퇴사운</p>
+        <p>${list[4].luck}</p>
     </div>
 </div>
 <div style="text-align: center; margin-top: 20px;">
-    <a href = "Ne03_NotMember.html">
-        <button id="retry-button" class="button">다시하기</button>
-    </a>
+
+        <button id="retry-button" class="button w-btn-outline w-btn-yellow-outline" onclick="location.href='/ehr/resources/Ne02_QuestionMemeber.html'">다시하기</button>
+
 </div>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
+    $('.tab-content').hide();
+    $('ul.tabs li').click(function() {
+        var tab_id = $(this).attr('data-tab');
+        $('ul.tabs li').removeClass('current');
         $('.tab-content').hide();
-        $('ul.tabs li').click(function() {
-            var tab_id = $(this).attr('data-tab');
-            $('ul.tabs li').removeClass('current');
-            $('.tab-content').hide();
-            $(this).addClass('current');
-            $("#" + tab_id).show();
-        });
-        // Retry button click event handler
-        $('#retry-button').click(function() {
-            // Handle retry functionality
-        });
-        // Share button click event handler
-        $('#share-button').click(function() {
-            // Handle share functionality
-        });
+        $(this).addClass('current');
+        $("#" + tab_id).show();
     });
+    // Retry button click event handler
+    $('#retry-button').click(function() {
+      /*  window.location.href = "/ehr/ELCARO/myPage.do"; */
+    });
+    // Share button click event handler
+    $('#share-button').click(function() {
+        // Handle share functionality
+    });
+});
+
+$(document).ready(function() {
+    // ...
+
+    $('.tab-content').click(function() {
+        var tab_id = $(this).attr('data-tab');
+        $('.tab-content').removeClass('current');
+        $('.tab-content').hide();
+        $(this).addClass('current');
+        $("#" + tab_id).show();
+
+        adjustContainerWidth(); // 탭을 클릭할 때마다 너비 조정
+    });
+
+    // ...
+});
 </script>
 </body>
 </html>

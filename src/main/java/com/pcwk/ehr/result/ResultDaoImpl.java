@@ -10,6 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.signUp.SignUpVO;
+
 
 @Repository
 public class ResultDaoImpl implements ResultDao {
@@ -62,5 +64,43 @@ public class ResultDaoImpl implements ResultDao {
 		return list;
 
 		}
+	
+	public List<ResultVO> getNick(ResultVO resultVO) throws SQLException{
+		List<ResultVO> listnm = new ArrayList<ResultVO>();
+
+		String statement = NAMESPACE+DOT+"getNick";
+		LOG.debug("┌─────────┐");
+		LOG.debug("│statement│"+statement);
+		LOG.debug("└─────────┘");
+		LOG.debug("2. param " + resultVO);
+		
+		listnm = sqlSessionTemplate.selectList(statement, resultVO);
+		for (ResultVO vo : listnm) {
+			LOG.debug("3. vo="+vo);
+		}
+
+		return listnm;
+
+		}
+	
+	@Override
+	public int add(ResultVO resultVO) throws SQLException, ClassNotFoundException {
+		
+		int flag = 0;
+
+		String statement = this.NAMESPACE+DOT+"add";
+		
+		LOG.debug("┌───────────────┐");
+		LOG.debug("│DaoImpl구역!!!!!│"+statement);
+		LOG.debug("└───────────────┘");
+		LOG.debug("SignUpVO 값 ==" + resultVO.toString());
+		
+		flag = this.sqlSessionTemplate.insert(statement, resultVO); 
+		
+		LOG.debug("DaoImple flag 값 = " + flag);
+		
+		return flag;
+
+	}
 	
 }

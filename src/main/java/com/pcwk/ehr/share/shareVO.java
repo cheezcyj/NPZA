@@ -1,19 +1,21 @@
 package com.pcwk.ehr.share;
 
-public class shareVO {
+public class ShareVO {
 
-    public String Id;
+    public int seq;
+
+    public String userId;
 
     public String url;
 
     public String date;
 
     public String getId() {
-        return Id;
+        return userId;
     }
 
     public void setId(String id) {
-        Id = id;
+    	userId = id;
     }
 
     public String getUrl() {
@@ -32,10 +34,10 @@ public class shareVO {
         this.date = date;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "shareVO{" +
-                "url='" + url + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "ShareVO [userId=" + userId + ", url=" + url + "]";
+	}
+
+    
 }

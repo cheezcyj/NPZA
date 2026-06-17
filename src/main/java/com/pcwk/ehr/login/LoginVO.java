@@ -4,8 +4,25 @@ public class LoginVO {
 	private String userId;// 회원id
 	private String passwd;// 비번
 	private String nickName;// 닉네임
+	private String mbti;// 닉네임
+	private String ani;// 닉네임	
 	
-	
+
+	public String getMbti() {
+		return mbti;
+	}
+
+	public void setMbti(String mbti) {
+		this.mbti = mbti;
+	}
+
+	public String getAni() {
+		return ani;
+	}
+
+	public void setAni(String ani) {
+		this.ani = ani;
+	}
 
 	public String getNickName() {
 		return nickName;
@@ -36,7 +53,8 @@ public class LoginVO {
 
 	@Override
 	public String toString() {
-		return "LoginVO [userId=" + userId + ", nickName=" + nickName + "]";
+		return "LoginVO [userId=" + userId + ", passwd=" + passwd + ", nickName=" + nickName + ", mbti=" + mbti
+				+ ", ani=" + ani + "]";
 	}
 
 

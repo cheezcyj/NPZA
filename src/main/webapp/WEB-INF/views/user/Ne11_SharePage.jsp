@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <jsp:include page="header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,6 +16,18 @@
             font-weight: 900;
             font-style: normal;
         }
+         @font-face {
+           font-family: 'Cafe24Dongdong';
+           src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
+           font-weight: 800;
+           font-style: normal;
+        }
+        @font-face {
+            font-family: 'NeoDunggeunmo';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         .wrapper {
             display: flex;
             justify-content: center;
@@ -23,12 +36,12 @@
         .box {
             margin: 20px auto;
             padding: 20px;
-            border: 3px solid #fce205;
-            width: 200px;
+            border: 10px solid #EDF1D6;
+            width: 400px;
             border-radius: 10px;
             box-sizing: content-box;
-            font-family: 'EF_hyunydororong';
-            font-size: 100%;
+            font-family: 'Cafe24Dongdong';
+            font-size: 200%;
         }
         .sns-icons {
             display: flex;
@@ -46,17 +59,45 @@
             cursor: pointer;
         }
         .sns-icon.facebook {
-            background-image: url('/FROND_END/images/facebook.png');
+            background-image: url('../resources/images/share/facebook.png');
         }
         .sns-icon.twitter {
-            background-image: url('/FROND_END/images/twitter.png');
+            background-image: url('../resources/images/share/twitter.png');
         }
         .sns-icon.link {
-            background-image: url('/FROND_END/images/link.png');
+            background-image: url('../resources/images/share/link.png');
         }
         .sns-icon.naver {
-            background-image: url('/FROND_END/images/naver.png');
+            background-image: url('../resources/images/share/naver.png');
             cursor: pointer;
+        }
+        
+         button {
+            margin: 20px;
+            margin-bottom: 150px;
+            font-family: 'NeoDunggeunmo';
+        }
+
+        .w-btn-outline {
+            position: relative;
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            font-family: 'NeoDunggeunmo';
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+            border:#F5D061;
+        }
+
+        .w-btn-yellow-outline {
+            background-color: #F5D061;
+            border-color: #ffffff;
+        }
+
+        .w-btn-yellow-outline:hover {
+            background-color: #D3D3D3;
+            color: #000000;
         }
 
     </style>
@@ -132,10 +173,10 @@
 
 <!-- 페이스북 공유 버튼 -->
 <span data-href="" id="facebookButton">
-	  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
-	    <div class="sns-icon facebook" onclick="shareOnFacebook(desiredURL)"></div>
-	  </a>
-	</span>
+    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+      <div class="sns-icon facebook" onclick="shareOnFacebook(desiredURL)"></div>
+    </a>
+  </span>
 
 <!-- 네이버 공유 버튼 -->
 <span>
@@ -161,6 +202,12 @@
 <a href="#" onclick="copyToClipboard()">
     <div class="sns-icon link"></div>
 </a>
+
+    <div style="text-align: center; margin-top: 20px;">
+    <a href = "/ehr/ELCARO/myPage.do">
+        <button id="retry-button" class="w-btn-outline w-btn-yellow-outline">다시하기</button>
+    </a>
+    </div>
 
 
 </body>
