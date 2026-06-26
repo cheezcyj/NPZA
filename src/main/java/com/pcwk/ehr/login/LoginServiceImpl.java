@@ -73,6 +73,11 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.get(user);
 	}
 
+	@Override
+	public int deleteUserData(String userId) throws SQLException {
+		return loginDao.deleteUserData(userId);
+	}
+
 
 
 }

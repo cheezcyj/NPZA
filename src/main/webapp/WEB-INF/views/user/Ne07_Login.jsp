@@ -8,6 +8,8 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
+    <link rel="icon" type="image/svg+xml" href="${CP}/resources/favicon.svg?v=20260626n">
+    <link rel="stylesheet" href="${CP}/resources/css/npzy-font.css">
     <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
   <script>
   $(document).ready(function(){ //모든 화면이다 로딩이 되면
@@ -81,10 +83,18 @@
         body {
             font-family: NeoDunggeunmo, Cafe24Dongdong;
             background-color: #F4F4F4;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 58px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .container {
+        .login-container {
             max-width: 400px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0 24px;
             padding: 30px;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -123,11 +133,14 @@
             text-align: center;
             margin-top: 10px;
         }
+        .form-group.signup-link {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>NE PAL ZZY YA</h2>
+<jsp:include page="header.jsp" />
+<div class="login-container">
     <form>
         <div class="form-group">
             <label for="username">ID:</label>

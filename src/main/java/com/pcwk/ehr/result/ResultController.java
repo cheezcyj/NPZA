@@ -39,10 +39,17 @@ public class ResultController {
 		List<ResultVO> list = resultService.getLuck(search);
 		model.addAttribute("list", list);
 		System.out.println(list);
-		
 
-
-		
+		if (userId != null && !"".equals(userId)) {
+			try {
+				ResultVO history = new ResultVO();
+				history.setId(userId);
+				history.setUrl(request.getRequestURL().toString());
+				resultService.add(history);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		return "user/Ne05_MemberResultPage";
 			

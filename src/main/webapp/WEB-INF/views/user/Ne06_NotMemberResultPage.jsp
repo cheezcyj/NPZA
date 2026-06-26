@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:include page="header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>NotMemberResultPage</title>
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/resources/favicon.svg?v=20260626n">
         <style>
        body {
             background-color: #EDF1D6;
-            margin-top: 100px;
+            margin: 0;
+            padding-top: 120px;
             font-family: 'Trebuchet MS', serif;
             line-height: 1.6;
             text-align: center;
         }
-        .container {
+        .fortune-container {
             text-align: left;     
             width: 500px;
             margin: 0 auto;
@@ -119,11 +120,12 @@
             background-color: #07689F;
             color: #F5D061;
             width: 500px;
+            max-width: calc(100% - 48px);
             border: 1px solid #A2D5F2;
             border-radius: 5px;
             padding: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
+            margin: 0 auto 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -134,13 +136,15 @@
             background-color: #07689F;
             color: #F5D061;
             width: 500px;
+            max-width: calc(100% - 48px);
             border: 1px solid #A2D5F2;
             border-radius: 5px;
             padding: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
+            margin: 0 auto 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            gap: 4px;
         }
 
         /* 다시하기 공유하기 버튼 */
@@ -177,6 +181,11 @@
             background-color: #D3D3D3;
             color: #000000;
         }
+        .result-actions {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 90px;
+        }
         @font-face {
             font-family: 'NeoDunggeunmo';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
@@ -188,6 +197,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<jsp:include page="header.jsp" />
 <!-- 햄버거버튼 -->
   <div id="nickname">
     <h1 id="user-nickname"></h1>
@@ -222,7 +232,7 @@
         </script>             
     </p>
 </div>
-<div class="container">
+<div class="fortune-container">
     <ul class="tabs">
         <li class="tab-link" data-tab="tab-1">고백운</li>
         <li class="tab-link" data-tab="tab-2">데이트운</li>
@@ -246,7 +256,7 @@
         <p>${list[4].luck}</p>
     </div>
 </div>
-<div style="text-align: center; margin-top: 20px;">
+<div class="result-actions">
 
         <button id="retry-button" class="button w-btn-outline w-btn-yellow-outline" onclick="location.href='/ehr/resources/Ne02_QuestionMemeber.html'">다시하기</button>
 
@@ -254,6 +264,9 @@
 <script>
 $(document).ready(function() {
     $('.tab-content').hide();
+    $('ul.tabs li:first').addClass('current');
+    $('#tab-1').show();
+
     $('ul.tabs li').click(function() {
         var tab_id = $(this).attr('data-tab');
         $('ul.tabs li').removeClass('current');
@@ -269,22 +282,6 @@ $(document).ready(function() {
     $('#share-button').click(function() {
         // Handle share functionality
     });
-});
-
-$(document).ready(function() {
-    // ...
-
-    $('.tab-content').click(function() {
-        var tab_id = $(this).attr('data-tab');
-        $('.tab-content').removeClass('current');
-        $('.tab-content').hide();
-        $(this).addClass('current');
-        $("#" + tab_id).show();
-
-        adjustContainerWidth(); // 탭을 클릭할 때마다 너비 조정
-    });
-
-    // ...
 });
 </script>
 </body>

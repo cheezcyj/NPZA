@@ -7,6 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="JH">
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/resources/favicon.svg?v=20260626n">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/npzy-font.css">
     <style>
         @font-face {
             font-family: 'Cafe24Dongdong';
@@ -21,11 +23,27 @@
         url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&display=swap')
         ;
 
+        body {
+            margin: 0;
+            padding-top: 96px;
+            padding-bottom: 110px;
+        }
+
         fieldset {
             border: 100px;
             text-align: center;
             display: flex;
             justify-content: center;
+        }
+
+        .record-box {
+            width: 520px;
+            max-width: calc(100vw - 48px);
+            box-sizing: border-box;
+        }
+
+        .record-table-field {
+            margin-top: 36px;
         }
 
         h1 {
@@ -35,7 +53,9 @@
             background-color: #FFD500;
             border: none;
             height: auto;
-            width: auto;
+            width: 520px;
+            max-width: calc(100vw - 48px);
+            box-sizing: border-box;
             background-position: center;
             border-radius: 5px;
             display: inline-block;
@@ -44,23 +64,54 @@
         }
 
         table {
-            border: 1px;
+            border: 1px solid #D3D3D3;
             border-collapse: collapse;
+            width: 520px;
+            max-width: calc(100vw - 48px);
         }
 
         td, th {
             font-family: Cafe24Dongdong;
+            padding: 14px 24px;
+            text-align: center;
+            border: 1px solid #D3D3D3;
+        }
+
+        .record-title {
+            background-color: #F5D061;
+            color: #282F44;
+            font-size: 24px;
+        }
+
+        .record-link {
+            color: #282F44;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .record-link:hover {
+            color: #07689F;
+            text-decoration: underline;
         }
 
         .pagination .page_link {
             text-align: center;
         }
 
+        #pagination {
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
         .config {
             background-color: #FFD500;
             border: none;
             color: black;
-            padding: 15px 128px;
+            padding: 15px 24px;
+            width: 320px;
+            max-width: calc(100vw - 48px);
+            box-sizing: border-box;
+            white-space: nowrap;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -85,12 +136,13 @@
         }
 
     </style>
-    <title>NAE PAL ZZA YA</title>
+    <title>NE PAL ZZA YA</title>
 </head>
 <body>
+<jsp:include page="header.jsp" />
 <div>
     <fieldset>
-        <h1>
+        <h1 class="record-box">
             <span id="username" style="font-weight: bold;"></span>님
             <span style="font-weight: lighter;"> 어서오세요 </span>
             
@@ -99,18 +151,20 @@
 </div>
 
 <div>
-    <fieldset>
-        <table id="data-table" border="1">
+    <fieldset class="record-table-field">
+        <table id="data-table" class="record-box" border="1">
             <tr>
-                <td><strong>MBTI</strong></td>
-                <td><strong>검사날짜</strong></td>
-                <td><strong>URL</strong></td>
+                <th class="record-title">
+                    나의 운세 검사 기록
+                </th>
             </tr>
             <c:forEach var="vo" items="${list}">
                 <tr>
-                    <td>${vo.mbti_type}</td>
-                    <td>${vo.result_date}</td>
-                    <td><a href="${vo.url}" target="_blank">${vo.url}</a></td>
+                    <td>
+                        <a class="record-link" href="${vo.url}" target="_blank">
+                            본 날짜: ${vo.result_date}
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -121,7 +175,7 @@
     <!-- 페이지 번호를 동적으로 생성할 영역 -->
 </div>
 <div
-        style="text-align: center; position: fixed; bottom: 20px; left: 0; right: 0;">
+        style="text-align: center; margin-top: 36px;">
     <button class="config" type="button"
             onclick="location.href='/ehr//ELCARO/result.do'">
         <!-- 운세 결과 경로 -->
@@ -162,7 +216,7 @@
             const row = rows[i];
             if (i === 0) {
                 row.style.display = "table-row"; // 첫 번째 행은 항상 표시
-            } else if (i >= startIndex && i < endIndex) {
+            } else if ((i - 1) >= startIndex && (i - 1) < endIndex) {
                 row.style.display = "table-row";
             } else {
                 row.style.display = "none";
@@ -191,30 +245,9 @@
     
     
 
- // URL을 축약하여 표시하는 함수
-    function shortenUrl(url) {
-        const maxUrlLength = 20;
-        if (url.length > maxUrlLength) {
-            return url.slice(0, maxUrlLength) + "...";
-        }
-        return url;
-    }
-
-    // URL 행 데이터를 축약하여 표시하는 함수
-    function shortenUrlRowData() {
-        const urlCells = dataTable.querySelectorAll("td:nth-child(3) a"); // URL이 표시될 셀의 선택자
-
-        urlCells.forEach(function(cell) {
-            const url = cell.textContent;
-            cell.textContent = shortenUrl(url);
-            cell.title = url; // 축약된 URL에 마우스를 올렸을 때 전체 URL을 툴팁으로 보여줍니다.
-        });
-    }
-
     // 초기 페이지 설정
     showDataForPage(1);
     createPagination();
-    shortenUrlRowData();
 </script>
 </body>
 </html>

@@ -1,34 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="user">
+    <link rel="icon" type="image/svg+xml" href="${CP}/resources/favicon.svg?v=20260626n">
 
     <style>
-       
-        *{
+        * {
             text-align: center;
-            }
-        
-        body{
-          height: 100%;
         }
-        
-        @font-face {
-           font-family: 'Cafe24Dongdong';
-           src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
-           font-weight: 800;
-           font-style: normal;
+
+        body {
+            min-height: 100%;
+            padding-top: 80px;
         }
+
         @font-face {
-          font-family: 'EF_hyunydororong';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunydororong.woff2') format('woff2');
-          font-weight: 900;
-          font-style: normal;
-      }
+            font-family: 'Cafe24Dongdong';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
+            font-weight: 800;
+            font-style: normal;
+        }
 
         @font-face {
             font-family: 'Hahmlet-Regular';
@@ -36,29 +33,33 @@
             font-weight: normal;
             font-style: normal;
         }
+
         @font-face {
             font-family: 'NeoDunggeunmo';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
             font-weight: normal;
             font-style: normal;
         }
-         .wrapper {
+
+        .wrapper {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            margin-top: 80px;
+            margin-top: 40px;
         }
+
         .box {
             font-family: 'Cafe24Dongdong';
             margin: 20px auto;
             padding: 20px;
             border: 10px solid #EDF1D6;
             width: 400px;
+            max-width: calc(100% - 48px);
             border-radius: 10px;
-            box-sizing: content-box;
-            box-sizing: content-box;
+            box-sizing: border-box;
             font-size: 170%;
         }
+
         p {
             font-family: 'Hahmlet-Regular';
             font-size: 200%;
@@ -66,10 +67,8 @@
         }
 
         button {
-            margin: 20px;
-            margin-bottom: 150px;
+            margin: 12px;
             font-family: 'NeoDunggeunmo';
-            
         }
 
         .w-btn-outline {
@@ -81,7 +80,7 @@
             text-decoration: none;
             font-weight: 600;
             transition: 0.25s;
-            border:#F5D061;
+            border: #F5D061;
         }
 
         .w-btn-yellow-outline {
@@ -90,56 +89,53 @@
         }
 
         .w-btn-yellow-outline:hover {
-            background-color: #D3D3D3;
+            background-color: #E7B800;
             color: #000000;
         }
 
-        footer {
-            text-align: right;
-            font-size: xx-small;
-        } 
-    </style>
+        .w-btn-gray-outline {
+            background-color: #D3D3D3;
+            border-color: #D3D3D3;
+            color: #000000;
+        }
 
+        .w-btn-gray-outline:hover {
+            background-color: #BFC3C7;
+            color: #000000;
+        }
+
+        .fortune-actions {
+            margin-top: 72px;
+            margin-bottom: 32px;
+        }
+
+    </style>
 </head>
 <body>
 <jsp:include page="header.jsp" />
+
 <div class="wrapper">
     <div class="box">
-        <span class="nickname" id="username"></span>
-        <span class="hello">님 환영합니다!</span>
-        </div>
+        <span class="nickname">${sessionScope.niName}</span>
+        <span class="hello">님 환영합니다</span>
+    </div>
 </div>
+
 <div>
     <p>Curious about your luck?</p>
     <p>Check your luck!</p>
 </div>
-<button class="w-btn-outline w-btn-yellow-outline" type="button"
-        onclick="location.href='/ehr/ELCARO/resultSelect.do'">
-    이전 운세 확인
-</button>
-<button class="w-btn-outline w-btn-yellow-outline" type="button"
-        onclick="location.href='/ehr/ELCARO/result.do'">
-    오늘 운세 확인
-</button>
-<!-- <div>
-    <footer>NE PAL ZZA YA(NPZY)</footer>
-</div> -->
 
-
-<script>
-
-    
-    
-    // 데이터베이스에서 이름 가져오기
-    var username = "${sessionScope.niName}"; // 예시 이름, 실제로는 데이터베이스에서 가져온 값을 사용하세요.
-
-    // HTML 요소에 동적으로 이름 삽입
-    var usernameElement = document.getElementById("username");
-    usernameElement.textContent = username;
-    
-    
-</script>
+<div class="fortune-actions">
+    <button class="w-btn-outline w-btn-gray-outline" type="button"
+            onclick="location.href='${CP}/ELCARO/resultSelect.do'">
+        이전 운세 확인
+    </button>
+    <button class="w-btn-outline w-btn-yellow-outline" type="button"
+            onclick="location.href='${CP}/ELCARO/result.do'">
+        오늘 운세 확인
+    </button>
+</div>
 
 </body>
-
 </html>

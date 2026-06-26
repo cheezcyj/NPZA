@@ -15,12 +15,14 @@ if (gender == null) {
 
 <meta charset="UTF-8">
 <meta name="author" content="mmgom">
+<link rel="icon" type="image/svg+xml" href="${CP}/resources/favicon.svg?v=20260626n">
+<link rel="stylesheet" href="${CP}/resources/css/npzy-font.css">
 
 <style>
 .container {
 	max-width: 400px;
 	margin: auto;
-	padding: 200px;
+	padding: 160px 200px 60px;
 	background-color: #fff;
 	border: 1px solid #ddd;
 	border-radius: 5px;
@@ -234,7 +236,6 @@ border-color
 		</div>
 	</form>
 
-	<br>
 	<br>
 	<div>
 			<input type="button" id="signUpInfo" value="회원 가입" class="submitButtonMember">

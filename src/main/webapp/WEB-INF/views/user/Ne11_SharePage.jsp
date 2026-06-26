@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <jsp:include page="header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="user">
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/resources/favicon.svg?v=20260626n">
     <style>
         * {
             text-align: center;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
         }
         @font-face {
             font-family: 'EF_hyunydororong';
@@ -33,6 +38,16 @@
             justify-content: center;
             align-items: flex-start;
         }
+
+        .share-page-main {
+            min-height: calc(100vh - 58px);
+            padding-top: 58px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         .box {
             margin: 20px auto;
             padding: 20px;
@@ -45,7 +60,17 @@
         }
         .sns-icons {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        .sns-icons span,
+        .sns-icons a {
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
         }
         .sns-icon {
@@ -71,21 +96,30 @@
             background-image: url('../resources/images/share/naver.png');
             cursor: pointer;
         }
+
+        a,
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            text-decoration: none;
+        }
         
          button {
             margin: 20px;
-            margin-bottom: 150px;
+            margin-bottom: 0;
             font-family: 'NeoDunggeunmo';
         }
 
         .w-btn-outline {
             position: relative;
-            padding: 15px 30px;
+            padding: 18px 42px;
             border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             font-family: 'NeoDunggeunmo';
             text-decoration: none;
             font-weight: 600;
+            font-size: 22px;
             transition: 0.25s;
             border:#F5D061;
         }
@@ -100,11 +134,20 @@
             color: #000000;
         }
 
+        .share-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 36px;
+            text-align: center;
+        }
+
     </style>
     <title>10번 페이지</title>
 </head>
 <body>
-<br><br><br>
+<jsp:include page="header.jsp" />
+<main class="share-page-main">
 <div class="wrapper">
     <div class="box">
         결과를 공유해보세요~!
@@ -172,6 +215,7 @@
 </script>
 
 <!-- 페이스북 공유 버튼 -->
+<div class="sns-icons">
 <span data-href="" id="facebookButton">
     <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
       <div class="sns-icon facebook" onclick="shareOnFacebook(desiredURL)"></div>
@@ -202,12 +246,14 @@
 <a href="#" onclick="copyToClipboard()">
     <div class="sns-icon link"></div>
 </a>
+</div>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <div class="share-actions">
     <a href = "/ehr/ELCARO/myPage.do">
-        <button id="retry-button" class="w-btn-outline w-btn-yellow-outline">다시하기</button>
+        <button id="retry-button" class="w-btn-outline w-btn-yellow-outline">뒤로가기</button>
     </a>
     </div>
+</main>
 
 
 </body>

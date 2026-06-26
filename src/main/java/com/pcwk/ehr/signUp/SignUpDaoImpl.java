@@ -43,7 +43,7 @@ public class SignUpDaoImpl implements SignUpDao {
 		
 		int flag = 0;
 
-		String statement = this.NAMESPACE+DOT+"add";
+		String statement = NAMESPACE+DOT+"add";
 		
 		LOG.debug("┌───────────────┐");
 		LOG.debug("│DaoImpl구역!!!!!│"+statement);
@@ -63,7 +63,7 @@ public class SignUpDaoImpl implements SignUpDao {
 	// 아이디 중복 검사
 	public int idCheck(String userId) throws Exception {
 		
-		String statementtwo = this.NAMESPACE+DOT+"idCheck";
+		String statementtwo = NAMESPACE+DOT+"idCheck";
 		
 		int cnt = sqlSessionTemplate.selectOne(statementtwo, userId);
 		

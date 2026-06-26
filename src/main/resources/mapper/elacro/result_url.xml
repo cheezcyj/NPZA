@@ -6,14 +6,27 @@
 
 
      <select id="resultSelect" parameterType="Result_Url_VO" resultType="Result_Url_VO">
-        SELECT a.nickname,
-               u.result_date,
-               u.url,
-               m.mbti_type
-        FROM account_tb a
-                 JOIN url_tb u ON a.id = u.id
-                 JOIN mbti_tb m ON a.mbti = m.mbti
-        WHERE a.id = #{Id}
+        SELECT nickname,
+               result_date,
+               url,
+               mbti_type
+        FROM (
+            SELECT a.nickname,
+                   u.result_date,
+                   u.url,
+                   m.mbti_type,
+                   u.seq,
+                   ROW_NUMBER() OVER (
+                       PARTITION BY TRUNC(u.result_date)
+                       ORDER BY u.result_date DESC, u.seq DESC
+                   ) AS rn
+            FROM account_tb a
+                     JOIN url_tb u ON a.id = u.id
+                     JOIN mbti_tb m ON a.mbti = m.mbti
+            WHERE a.id = #{Id}
+        )
+        WHERE rn = 1
+        ORDER BY result_date DESC, seq DESC
     </select>
 
 

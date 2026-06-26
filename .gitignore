@@ -1,4 +1,9 @@
 target/
 .idea/
+.tomcat-run/
 *.class
+
+.classpath
+.project
+.settings/
 

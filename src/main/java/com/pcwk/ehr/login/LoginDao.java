@@ -25,4 +25,6 @@ public interface LoginDao {
 	
 	LoginVO get(LoginVO user) throws ClassNotFoundException, SQLException;
 
+	public int deleteUserData(String userId) throws SQLException;
+
 }

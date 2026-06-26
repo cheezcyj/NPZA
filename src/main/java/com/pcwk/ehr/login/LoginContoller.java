@@ -59,6 +59,32 @@ public class LoginContoller {
 
     }
 
+	@RequestMapping(value = "/deleteAccount.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteAccount(HttpSession session) throws SQLException {
+		MessageVO message = new MessageVO();
+		String userId = (String) session.getAttribute("user");
+
+		if (userId == null || "".equals(userId)) {
+			message.setMegId("10");
+			message.setMsgContents("로그인 후 이용해주세요.");
+			return new Gson().toJson(message);
+		}
+
+		int flag = loginService.deleteUserData(userId);
+		if (flag == 1) {
+			session.removeAttribute("user");
+			session.invalidate();
+			message.setMegId("30");
+			message.setMsgContents("회원 탈퇴가 완료되었습니다.");
+		} else {
+			message.setMegId("20");
+			message.setMsgContents("회원 탈퇴에 실패했습니다.");
+		}
+
+		return new Gson().toJson(message);
+	}
+
 
 	@RequestMapping(value = "/doLogin.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody

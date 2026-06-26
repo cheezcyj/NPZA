@@ -6,16 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <title>MemberResultPage</title>
-    <jsp:include page="header.jsp"/>
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/resources/favicon.svg?v=20260626n">
     <style>
        body {
             background-color: #EDF1D6;
-            margin-top: 100px;
+            margin: 0;
+            padding-top: 120px;
             font-family: 'Trebuchet MS', serif;
             line-height: 1.6;
             text-align: center;
         }
-        .container {
+        .fortune-container {
             text-align: left;     
             width: 500px;
             margin: 0 auto;
@@ -120,11 +121,12 @@
             background-color: #07689F;
             color: #F5D061;
             width: 500px;
+            max-width: calc(100% - 48px);
             border: 1px solid #A2D5F2;
             border-radius: 5px;
             padding: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
+            margin: 0 auto 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -135,13 +137,15 @@
             background-color: #07689F;
             color: #F5D061;
             width: 500px;
+            max-width: calc(100% - 48px);
             border: 1px solid #A2D5F2;
             border-radius: 5px;
             padding: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
+            margin: 0 auto 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            gap: 4px;
         }
 
         /* 다시하기 공유하기 버튼 */
@@ -175,8 +179,32 @@
         }
 
         .w-btn-yellow-outline:hover {
-            background-color: #D3D3D3;
+            background-color: #E7B800;
             color: #000000;
+        }
+
+        .w-btn-gray-outline {
+            background-color: #D3D3D3;
+            border-color: #D3D3D3;
+            color: #000000;
+        }
+
+        .w-btn-gray-outline:hover {
+            background-color: #BFC3C7;
+            color: #000000;
+        }
+        .result-actions {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 90px;
+        }
+
+        .result-actions a,
+        .result-actions a:link,
+        .result-actions a:visited,
+        .result-actions a:hover,
+        .result-actions a:active {
+            text-decoration: none;
         }
         @font-face {
             font-family: 'NeoDunggeunmo';
@@ -189,6 +217,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <div id= "nickname">
     <h1>${outVO.nick}</h1><h2>님의 운세는</h2>
 </div><br>
@@ -204,7 +233,7 @@
              src="${outVO.aniSrc}" width="150" height="150" />
     </p>
 </div>
-<div class="container">
+<div class="fortune-container">
     <ul class="tabs">
         <li class="tab-link" data-tab="tab-1">고백운</li>
         <li class="tab-link" data-tab="tab-2">데이트운</li>
@@ -229,18 +258,21 @@
     </div>
 </div>
 
-<div style="text-align: center; margin-top: 20px;">
-    <a href = "/ehr/ELCARO/myPage.do">
-        <button id="retry-button" class="button w-btn-outline w-btn-yellow-outline">다시하기</button>
+<div class="result-actions">
+    <a href="/ehr/ELCARO/myPage.do">
+        <button id="retry-button" class="button w-btn-outline w-btn-gray-outline" type="button">뒤로가기</button>
     </a>
-    <a href = "/ehr/ELCARO/shareDesiredURL.do">
-        <button id="share-button" class="button w-btn-outline w-btn-yellow-outline">공유하기</button>
+    <a href="/ehr/ELCARO/shareDesiredURL.do">
+        <button id="share-button" class="button w-btn-outline w-btn-yellow-outline" type="button">공유하기</button>
     </a>
 </div>
 
 <script>
     $(document).ready(function() {
         $('.tab-content').hide();
+        $('ul.tabs li:first').addClass('current');
+        $('#tab-1').show();
+
         $('ul.tabs li').click(function() {
             var tab_id = $(this).attr('data-tab');
             $('ul.tabs li').removeClass('current');
@@ -257,79 +289,6 @@
             // Handle share functionality
         });
     });
-    
-    $(document).ready(function() {
-        // ...
-
-        $('.tab-content').click(function() {
-            var tab_id = $(this).attr('data-tab');
-            $('.tab-content').removeClass('current');
-            $('.tab-content').hide();
-            $(this).addClass('current');
-            $("#" + tab_id).show();
-
-            adjustContainerWidth(); // 탭을 클릭할 때마다 너비 조정
-        });
-
-        // ...
-    });
-    
-    var sessionId = "${sessionScope.user}";
-    $(document).ready(function() {
-    	  // AJAX 요청 초기화
-    	  $.ajax({
-    	    url: '/ehr/ELCARO/pushData.do',
-    	    method: 'GET',
-            async : "true",
-            dataType : "html",
-            data : { 
-              "id" : sessionId,
-              "url" : url
-            },
-    	    success: function(response) {
-    	      // 요청 성공 시 동작할 코드
-    	      console.log('AJAX 요청 성공');
-    	      console.log(response);
-    	    },
-    	    error: function(xhr, status, error) {
-    	      // 요청 실패 시 동작할 코드
-    	      console.log('AJAX 요청 실패');
-    	      console.log(error);
-    	    }
-    	  });
-    	});
-
-
-   // 매개변수 값을 설정합니다.
-/*       var nick = "{outVO.nick}";
-      var mbtiSrc = "{outVO.mbtiSrc}";
-      var aniSrc = "{outVO.aniSrc}";
-      var luckList = [
-        {luck: '{list[0].luck}'},
-        {luck: '{list[1].luck}'},
-        {luck: '{list[2].luck}'},
-        {luck: '{list[3].luck}'},
-        {luck: '{list[4].luck}'}
-      ]; */
-      
-      // 매개변수를 URL에 추가합니다.
-      var url = 'http://localhost:8080/ehr/ELCARO/result.do';
-/*       url += '?nick=' + encodeURIComponent(nick);
-      url += '&mbtiSrc=' + encodeURIComponent(mbtiSrc);
-      url += '&aniSrc=' + encodeURIComponent(aniSrc);
-      for (var i = 0; i < luckList.length; i++) {
-        url += '&luckList[' + i + '].luck=' + encodeURIComponent(luckList[i].luck);
-      } */
-
-      
-      var urlOutput = document.getElementById('urlOutput');
-      
-      // URL을 열거나 링크로 사용합니다.
-      console.log('URL: ' + url);
-      // 이후에는 해당 URL을 브라우저에서 열거나, 다른 페이지에서 링크로 사용하면 매개변수가 정상적으로 전달됩니다.
-
-
-
 </script>
 </body>
 </html>

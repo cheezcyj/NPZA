@@ -68,17 +68,23 @@
     </select>
     
     <insert id="add" parameterType="ResultVO">
-    INSERT INTO elcaro.url_tb (
-		    seq,
-		    result_date,
-		    id,
-		    url
-      ) VALUES (
-		    url_seq.NEXTVAL,
-		    sysdate,
-		    #{id},
-		    #{url}
-      )
+    BEGIN
+        DELETE FROM elcaro.url_tb
+        WHERE id = #{id}
+          AND TRUNC(result_date) = TRUNC(SYSDATE);
+
+        INSERT INTO elcaro.url_tb (
+            seq,
+            result_date,
+            id,
+            url
+        ) VALUES (
+            (SELECT NVL(MAX(seq), 0) + 1 FROM elcaro.url_tb),
+            SYSDATE,
+            #{id},
+            #{url}
+        );
+    END;
     </insert>
     
 </mapper>

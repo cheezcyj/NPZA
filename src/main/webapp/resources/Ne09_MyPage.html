@@ -3,6 +3,8 @@
   <head>
       <meta charset="UTF-8">
       <meta name="author" content="user">
+      <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20260626n">
+      <link rel="stylesheet" href="css/npzy-font.css">
       <style>
         * {
           text-align: center;
@@ -42,6 +44,11 @@
           margin: 20px;
           font-family: 'NeoDunggeunmo';
         }
+
+        .fortune-actions {
+          margin-top: 72px;
+          margin-bottom: 32px;
+        }
       
       .w-btn-outline {
           position: relative;
@@ -61,8 +68,19 @@
         }
         
         .w-btn-yellow-outline:hover {
-          background-color: #ffffff;
-          color: #fce205;
+          background-color: #E7B800;
+          color: #000000;
+        }
+
+        .w-btn-gray-outline {
+          background-color: #D3D3D3;
+          border-color: #D3D3D3;
+          color: #000000;
+        }
+
+        .w-btn-gray-outline:hover {
+          background-color: #BFC3C7;
+          color: #000000;
         }
 
         footer {
@@ -82,14 +100,16 @@
          <p>Curious about your luck?</p>
          <p>Check your luck!</p>
       </div>
-        <button class="w-btn-outline w-btn-yellow-outline" type="button"
-                onclick="location.href='Ne10_ResultUrl.html'">
-          이전 운세 확인
-        </button>
-        <button class="w-btn-outline w-btn-yellow-outline" type="button"
-                onclick="location.href='Ne05_MemberResultPage.html'">
-          오늘 운세 확인
-        </button>
+        <div class="fortune-actions">
+          <button class="w-btn-outline w-btn-gray-outline" type="button"
+                  onclick="location.href='Ne10_ResultUrl.html'">
+            이전 운세 확인
+          </button>
+          <button class="w-btn-outline w-btn-yellow-outline" type="button"
+                  onclick="location.href='Ne05_MemberResultPage.html'">
+            오늘 운세 확인
+          </button>
+        </div>
       <div>
         <footer>NE PAL ZZA YA(NPZY)</footer>
       </div>

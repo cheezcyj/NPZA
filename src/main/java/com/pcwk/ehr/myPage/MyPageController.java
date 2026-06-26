@@ -29,4 +29,9 @@ public class MyPageController {
 
 	}
 
+	@RequestMapping(value = "/ELCARO/accountPage.do")
+	public String accountPage() {
+		return "user/Ne12_AccountPage";
+	}
+
 }

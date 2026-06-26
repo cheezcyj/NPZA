@@ -24,6 +24,8 @@ public interface LoginService {
 	 * @throws SQLException
 	 */
 	LoginVO get(LoginVO user) throws SQLException, ClassNotFoundException;
+
+	public int deleteUserData(String userId) throws SQLException;
 	
 
 }

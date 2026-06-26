@@ -30,6 +30,24 @@
     WHERE id  = #{userId}
     </select>
 
+    <delete id="deleteUserUrl" parameterType="string">
+    DELETE FROM
+        url_tb
+    WHERE id = #{value, jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteUserResult" parameterType="string">
+    DELETE FROM
+        result_tb
+    WHERE id = #{value, jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteUserAccount" parameterType="string">
+    DELETE FROM
+        account_tb
+    WHERE id = #{value, jdbcType=VARCHAR}
+    </delete>
+
     
   <resultMap type="LogInVO" id="userMap">
     <result column="id" property="userId" />

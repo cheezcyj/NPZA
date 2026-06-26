@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <jsp:include page="header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/resources/favicon.svg?v=20260626n">
 <style id="fullpage_styles">
 @font-face {
     font-family: 'Cafe24Dongdong';
@@ -25,25 +25,32 @@ font-style: normal;
 }
 
 body{
-  margin-top: 80px;
+  margin-top: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 h2 {
 font-family: 'Cafe24Dongdong';
+font-size: 1.6rem;
+margin: 14px 0 8px;
 }
 
 select {
-width: 150px;
+width: 190px;
 padding: 0.5em;
 border: 1px solid #999;
 border-radius: 5px;
+text-align: center;
 }
 
 .name {
-width: 150px;
+width: 190px;
 padding: 0.5em;
 border: 1px solid #999;
 border-radius: 5px;
+text-align: center;
 }
 
 button {
@@ -56,17 +63,50 @@ border: none;
 color: black;
 padding: 15px 128px;
 text-align: center;
-font-size: 16px;
+font-size: 22px;
 border-radius: 5px;
 margin: 4px 2px;
+}
+
+.fortune-input-group {
+  display: block;
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.fortune-input-group input[type="radio"] {
+  margin: 0 6px 0 18px;
+  vertical-align: middle;
+}
+
+.fortune-input-group input[type="radio"]:first-of-type {
+  margin-left: 0;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.fortune-form-wrap {
+  min-height: calc(100vh - 58px);
+  padding-top: 58px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
 
 </head>
 <body>
-  <h2 style="text-align: center;">MBTI를 입력하세요</h2>
+<jsp:include page="header.jsp" />
+  <div class="fortune-form-wrap">
   <div style="text-align: center;">
     <form onsubmit="return submitForm()" action="/ehr/ELCARO/getNick.do">
+      <div class="fortune-input-group">
+      <h2>MBTI를 입력하세요</h2>
       <select id="mbti" name="mbti" required>
         <option style="text-align: center;" value="">=== 선택 ===</option>
           <option value="1">ISTJ</option>
@@ -93,7 +133,10 @@ margin: 4px 2px;
               localStorage.setItem('mbti', mbti);
           }
           </script>
-      <h2 style="text-align: center;">닉네임을 입력하세요</h2>
+      </div>
+
+      <div class="fortune-input-group">
+      <h2>닉네임을 입력하세요</h2>
       <input id="nickname" class="name" maxlength="30" required size="10" type="text" />
           <script>
           // 닉네임을 localStorage에 저장하는 함수
@@ -101,12 +144,16 @@ margin: 4px 2px;
               const nickname = document.getElementById('nickname').value;
               localStorage.setItem('nickname', nickname);
           }</script>
+      </div>
       
-      <h2 style="text-align: center;">성별을 입력하세요</h2>
+      <div class="fortune-input-group">
+      <h2>성별을 입력하세요</h2>
       <input name="gender" value="남자" type="radio" required /> 남자
       <input name="gender" value="여자" type="radio" required /> 여자
+      </div>
       
-      <h2 style="text-align: center;">띠를 입력하세요</h2>
+      <div class="fortune-input-group">
+      <h2>띠를 입력하세요</h2>
       <select id="ani" name="ani" required>
         <option style="text-align: center;" value="">=== 선택 ===</option>
           <option value="1">쥐</option>
@@ -129,10 +176,13 @@ margin: 4px 2px;
             localStorage.setItem('ani', ani);
         }
       </script>
-      <div style="text-align: center;">
+      </div>
+
+      <div class="form-actions">
         <button class="config" type="submit" onclick="saveNickname(); saveMbti(); saveAni();">운세 확인</button>
       </div>
     </form>
+  </div>
   </div>
   <script>
     function submitForm() {

@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'EF_hyunydororong';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/EF_hyunydororong.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+html,
+body,
+body *,
+button,
+input,
+select,
+textarea {
+  font-family: 'EF_hyunydororong', Arial, sans-serif !important;
+  letter-spacing: 0;
+}

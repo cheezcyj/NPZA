@@ -92,4 +92,15 @@ public class LoginDaoImpl implements LoginDao {
 		return outVO;
 	}
 
+	@Override
+	public int deleteUserData(String userId) throws SQLException {
+		this.sqlSessionTemplate.delete(NAMESPACE + DOT + "deleteUserUrl", userId);
+		try {
+			this.sqlSessionTemplate.delete(NAMESPACE + DOT + "deleteUserResult", userId);
+		} catch (Exception e) {
+			LOG.warn("RESULT_TB delete skipped.", e);
+		}
+		return this.sqlSessionTemplate.delete(NAMESPACE + DOT + "deleteUserAccount", userId);
+	}
+
 }

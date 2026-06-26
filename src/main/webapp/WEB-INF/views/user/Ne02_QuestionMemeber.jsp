@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author"  content="mmgom">
+    <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/resources/favicon.svg?v=20260626n">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/npzy-font.css">
     <style>
         * {
             text-align: center;
