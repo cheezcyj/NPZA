@@ -118,11 +118,11 @@ src/main/java/resource/config/database.properties
 ```properties
 jdbc.driver = oracle.jdbc.driver.OracleDriver
 jdbc.url = jdbc:oracle:thin:@127.0.0.1:1521:XE
-jdbc.username = ELCARO
-jdbc.password = 1234
+jdbc.username = YOUR_DB_USERNAME
+jdbc.password = YOUR_DB_PASSWORD
 ```
 
-Oracle XE에 `ELCARO` 계정과 프로젝트에서 사용하는 테이블을 준비해야 합니다.
+Oracle XE에 본인 로컬 DB 계정과 프로젝트에서 사용하는 테이블을 준비해야 합니다.
 
 주요 테이블 예시:
 
